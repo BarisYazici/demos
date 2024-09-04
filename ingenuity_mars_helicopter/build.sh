@@ -1,0 +1,1 @@
+docker build -t ingenuity_flight_simulator .
