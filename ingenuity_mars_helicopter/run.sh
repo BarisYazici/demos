@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Runs a docker container with the image created by build.bash
+# Runs a docker container with the image created by build.sh
 # Requires:
 #   docker
 #   an X server
@@ -19,8 +19,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PARENT_DIR="$(dirname "$SCRIPT_DIR")"
 
 # Start the container
-# if you don't have an nvidia card, remove the --gpus all flag
-# --gpus all 
+# if you don't have a graphic nvidia card, remove the --gpus all flag
 docker run --rm -it --gpus all \
   --name "$CONTAINER_NAME" \
   --network host \
@@ -29,4 +28,5 @@ docker run --rm -it --gpus all \
   -e DISPLAY="$DISPLAY" \
   -e TERM="$TERM" \
   -e QT_X11_NO_MITSHM=1 \
+  -e RMW_IMPLEMENTATION=rmw_cyclonedds_cpp \
   "$IMG_NAME"
